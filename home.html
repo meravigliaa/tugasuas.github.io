@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>De Capy</title>
+      <link rel="stylesheet" type="text/css" href="asset/css/global.css"></link>
+      <script src="asset/data.js"></script>
+      <style>
+        a {
+        text-decoration: none;
+        color: inherit;
+        }
+
+        h1{
+        font-weight:bolder;
+        font-size: 30px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;
+        }
+        h2 {
+        font-weight:400;
+        font-size: 20px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;  
+        }
+        h3{
+        font-weight: 100;
+        font-size: 15px;
+        color: #142264;
+        text-align: left;
+        }
+        h4 {
+        font-weight:bolder;
+        font-size: 20px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;
+        }
+        h5 { 
+        font-weight: 100;
+        font-size: 10px;
+        color: #142264;
+        text-align: left;
+        }
+
+
+        .today{
+        width: 60vw;
+        padding: 15px;
+        float: left;
+        margin: 15px;
+        }
+        .todayhighlight{
+        list-style: none;       
+        width: 100%;
+        height: 100%;
+        }
+        .todayhighlight img{
+        width: 100%;
+        padding-bottom: 20px;
+        }
+        .todaysmall{
+        list-style: none;
+        width: 30%;
+        float: left;
+        height: 300px;
+        margin: 30px 5px;
+        }
+        .todaysmall img {
+        width: 100%;
+        height: 175px;
+        padding-bottom: 20px;
+        }
+
+
+        .popular{
+        width: 25vw;
+        float: right;
+        margin: 15px;
+        margin-right: 50px;
+        padding-top: 30px;
+        }
+        .list {
+        list-style: none;
+        width: 100%;
+        padding: 10px 0px;
+        }
+
+
+        .products{
+        width: 100vw;
+        padding: 15px;
+        float: left;
+        margin: 15px;
+        margin-bottom: 250px;
+
+        }
+        .review{
+        list-style: none;
+        width: 350px;
+        height: 150px;
+        float: left;
+        display: flex;
+        justify-content: center;
+        padding: 25px;
+        }
+        .review img{
+          width: 200px;
+          height: 200px;
+          object-fit: contain;
+          padding-right: 20px;
+        }
+
+
+      </style>
+    </head>
+
+    <body>
+      <nav> 
+        <div class="navbar">
+            <div class="logo">
+              <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+            </div>
+            <div class="kanan">
+                <div class="main_container">
+                    <div class="menu"><li><a href="categories.html?categories=Mammals"> Mammals </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Fish">Fish </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Birds">Birds</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Reptiles">Reptiles</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Amphibians">Amphibians</li></a></div>
+                    <div class="menu" onclick="location.href='products.html'">Products</div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+        <div class="today">
+          <h1 style="padding-bottom: 30px;font-size: 35px;">Today's News</h1>
+          <div id="highlight"></div>
+          <div id="yangkecil"></div>
+        </div>
+        <div class="popular">
+          <h1 style="padding-bottom: 10px;">Popular News</h1>
+          <div id="listpop"></div>
+        </div>
+        <div class="products">
+          <h1 style="margin-top: 100 px; margin-bottom: 30px;" onclick="location.href='products.html'"> Recommended Products -></h1>
+          <div id="reviewlist"></div>
+        </div>  
+        <div style="height:200px;"></div>
+
+      </body>
+</html>
+
+<script>
+  var qs = window.location.search;
+  var ur = new URLSearchParams(qs);
+
+
+
+//Today's News Section
+  var articlecode = ur.get('articlecode');
+
+  if (!articlecode) {
+    articlecode = 1;
+  }
+
+var arttoday = data.articles.filter(function (el) {
+  return el.date == 31-02-23;
+});
+
+var highlight = '';
+  for (var i = 0; i < 1; i++) {
+    highlight = highlight + '<div class="todayhighlight"><li><a href="article.html?articlecode=' + 
+      arttoday[i].code + '"><img src="asset/img/' + arttoday[i].foto + '" /><h3>' + arttoday[i].category +
+        '</h3><h1>' + arttoday[i].title +
+        '</h1><h2>' + arttoday[i].author + '</h2>' + '</a></li></div>';
+  document.getElementById('highlight').innerHTML = highlight;
+}
+var yangkecil = '';
+  for (var i = 0; i < 3; i++) {
+    yangkecil = yangkecil + '<div class="todaysmall"><li><a href="article.html?articlecode=' + arttoday[i].code + '"><img src="asset/img/' + arttoday[i].foto + '" /><h5>' + arttoday[i].category +
+        '</h5><h4>' + arttoday[i].title +
+        '</h4><h3>' + arttoday[i].author + '</h3>' + '</a></li></div>';
+  document.getElementById('yangkecil').innerHTML = yangkecil;
+}
+
+
+
+//Popular News Section
+function sort(){
+    data.articles.sort(function(a,b){
+      var dataA = a.views;
+      var dataB  = b.views;
+        if(dataA < dataB) {
+          return 1;
+        }
+        if(dataA > dataB) {
+          return -1
+        }
+      return 0;
+    })
+};
+
+var listpop = '';
+  sort();
+  console.log("data sekarang: ");
+  console.log(data);
+  for (var i = 0; i < 6; i++) {
+    listpop = listpop + '<div class="list"><li><a href="article.html?articlecode=' + data.articles[i].code + '">' + '<h5>' + data.articles[i].category +
+        '</h5><h4>' + data.articles[i].title +
+        '</h4><h3>' + data.articles[i].author + '</h3>' + '</a></li></div>';
+  document.getElementById('listpop').innerHTML = listpop;
+}
+
+
+
+
+
+//Recommended Products Section
+var productreviews = ur.get('productreviews');
+
+if (!productreviews) {
+  productreviews = 1;
+}
+var reviewlist= '';
+  for (var r = 0; r < 3; r++) {
+    reviewlist = reviewlist + '<div class="review"><li><a href="reviews.html?productreviews=' + data.reviews[r].sku + '"><img src="asset/img/' + data.reviews[r].product + '" />' + '<h4>' + data.reviews[r].name +
+        '</h4>' + '<br>' +'<h3>' + data.reviews[r].categori + '</h3>' + '</a></li></div>';
+  document.getElementById('reviewlist').innerHTML = reviewlist;
+}
+
+</script>

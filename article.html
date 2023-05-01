@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Articles</title>
+      <link rel="stylesheet" type="text/css" href="asset/css/global.css"></link>
+      <script src="asset/data.js"></script>
+      <style>
+        a{
+          text-decoration: none;
+          color: inherit;
+        }
+        h1{
+        font-weight:bolder;
+        font-size: 30px;
+        color: #142264;
+        padding-top: 10px;
+        text-align: left;
+        }
+        h2 {
+        font-weight:400;
+        font-size: 20px;
+        color: #142264;
+        padding: 5px 0px;
+        text-align: left;  
+        }
+        h3{
+        font-weight: 100;
+        font-size: 15px;
+        color: black;
+        text-align: left;
+        }
+        h4 {
+        font-weight:bolder;
+        font-size: 20px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;
+        }
+        h5 { 
+        font-weight: 100;
+        font-size: 10px;
+        color: #142264;
+        text-align: left;
+        }
+        h6{
+        font-weight: 100;
+        font-size: 15px;
+        color: #142264;
+        text-align: left;
+        }
+
+
+
+        .articlebox {
+        width: 60vw;
+        padding: 25px;
+        float: left;
+        margin: 15px;
+        }
+        .articleisi{
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        }
+        .articleisi img{
+        width: 600px;
+        height: 400px;
+        margin: 25px 0px;
+        object-fit: cover;
+        }
+
+
+
+        .popular{
+        width: 25vw;
+        float: right;
+        margin: 15px;
+        margin-right: 50px;
+        padding-top: 30px;
+        }
+        .list {
+        list-style: none;
+        width: 100%;
+        padding: 10px 0px;
+        }
+
+      </style>
+    </head>
+
+    <body>
+      <nav> 
+        <div class="navbar">
+            <div class="logo">
+              <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+            </div>
+            <div class="kanan">
+                <div class="main_container">
+                    <div class="menu"><li><a href="categories.html?categories=Mammals"> Mammals </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Fish">Fish </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Birds">Birds</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Reptiles">Reptiles</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Amphibians">Amphibians</li></a></div>
+                    <div class="menu" onclick="location.href='products.html'">Products</div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+            <div class="articlebox">
+                <div id="header"></div>
+                <div id="authorlink"></div>
+                <div id="content"></div>
+            </div>
+            <div class="popular">
+              <h1 style="padding-bottom: 10px;">Popular News</h1>
+              <div id="listpop"></div>
+            </div>
+        </body>
+</html>
+<script>
+var qs = window.location.search;
+  var ur = new URLSearchParams(qs);
+
+  //article
+  var articlecode = ur.get('articlecode');
+
+  if (!articlecode) {
+    articlecode = 1;
+  }
+  var isinya = data.articles.filter(function (el) {
+  return el.code == articlecode;
+  });
+
+document.getElementById('header').innerHTML = '<div class="articleisi"><h6>' + isinya[0].category + '</h6><h1>' 
+  + isinya[0].title +'</h1></div>';
+
+document.getElementById('authorlink').innerHTML = '<div class="articleisi"><li><a href="authors.html?authorabout=' 
+  + isinya[0].number + '"><h6>' + isinya[0].author + '</h6></a></li></div>';
+
+document.getElementById('content').innerHTML = '<div class="articleisi"><img src="asset/img/' + isinya[0].foto + 
+  '"/><h3>' + isinya[0].content + '</h3></div>';
+
+
+
+
+//Popular News Section
+    function sort(){
+    data.articles.sort(function(a,b){
+      var dataA = a.views;
+      var dataB  = b.views;
+        if(dataA < dataB) {
+          return 1;
+        }
+        if(dataA > dataB) {
+          return -1
+        }
+      return 0;
+    })
+    };
+
+var listpop = '';
+  sort();
+  console.log("data sekarang: ");
+  console.log(data);
+  for (var i = 0; i < 6; i++) {
+    listpop = listpop + '<div class="list"><li><a href="article.html?articlecode=' + data.articles[i].code + '">' + '<h5>' + data.articles[i].category +
+        '</h5><h4>' + data.articles[i].title +
+        '</h4><h3>' + data.articles[i].author + '</h3>' + '</a></li></div>';
+  document.getElementById('listpop').innerHTML = listpop;
+}
+</script>

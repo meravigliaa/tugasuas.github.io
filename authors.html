@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>About the Authors</title>
+      <link rel="stylesheet" type="text/css" href="asset/css/global.css"></link>
+      <script src="asset/data.js"></script>
+    </head>
+    <style>
+a {
+text-decoration: none;
+color: inherit;
+}
+.main{
+  width: 100%;
+  padding: 25px 50px;
+  float:left
+}
+.about{
+  width: 50%;
+  height: 250px;
+  float: right;
+  margin-right: 150px;
+  padding-top: 100px;
+}
+.picture {
+  width: 25%;
+  float: left;
+  padding: 50px;
+}
+.picture img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+
+.list {
+  list-style: none;
+  float: left;
+  height: 250px;
+  width: 100vw;
+  padding: 25px;
+}
+.listpic{
+  width: 25%;
+  height: 250px;
+  float: left;
+}
+.listpic img{
+  width: 200px;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+  float: right;
+}
+.listtext{
+  width: 60%;
+  height: 250px;
+  float: right;
+  margin-right: 30px;
+}
+
+
+
+h1{
+font-weight:bolder;
+font-size: 30px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+
+h1{
+font-weight:bolder;
+font-size: 30px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+h2 {
+font-weight:400;
+font-size: 20px;
+color: #142264;
+padding-top: 5px;
+text-align: left;  
+}
+h3{
+font-weight: 100;
+font-size: 15px;
+color: #142264;
+text-align: left;
+}
+h4 {
+font-weight:bolder;
+font-size: 20px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+h5 { 
+font-weight: 100;
+font-size: 10px;
+color: #142264;
+text-align: left;
+}
+    </style>
+
+  <!-- NAV BAR-->
+    <body>
+      <nav> 
+        <div class="navbar">
+            <div class="logo">
+              <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+            </div>
+            <div class="kanan">
+                <div class="main_container">
+                    <div class="menu" onclick="location.href='categories.html'">All</div>
+                    <div class="menu" onclick="location.href='categories.html'">Mammals</div>
+                    <div class="menu" onclick="location.href='categories.html'">Fish</div>
+                    <div class="menu" onclick="location.href='categories.html'">Birds</div>
+                    <div class="menu" onclick="location.href='categories.html'">Reptiles</div>
+                    <div class="menu" onclick="location.href='categories.html'">Amphibians</div>
+                    <div class="menu" onclick="location.href='products.html'">Products</div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+  <h1 style="padding-left: 100px; padding-top: 100px;font-size: 50px;">About the Authors</h1>
+  <div class="main">
+    <div id="foto"></div>
+    <div id="content"></div>
+  </div>
+  <h1 style="padding-left: 100px;">Author's Works</h1>
+    <div class="list">
+      <div id="works"></div>
+    </div>
+  </div>
+</section>
+
+</body>
+
+
+<script>
+
+  var qs = window.location.search;
+  var ur = new URLSearchParams(qs);
+
+  //article
+
+  var authorabout = ur.get('authorabout');
+  if (!authorabout) {
+    authorabout = 1;
+  }
+  var link = data.articles.filter(function (el) {
+  return el.number == authorabout;
+  });
+  
+  document.getElementById('foto').innerHTML = '<div class="picture"><img src="asset/img/' + link[0].profile + '"/></div>';
+  document.getElementById('content').innerHTML = '<div class="about"><h1>' + link[0].author + '</h1><h2>' + link[0].about + 
+    '<h2></div>';
+
+  
+
+      //author works
+  var works = '';
+  for (var i = 0; link.length > i; i++) {
+    works = works + '<li><a href="article.html?articlecode=' + 
+      link[i].code + '"><div class="listpic">' + '<img src="asset/img/' + link[i].foto + '" /></div><div class="listtext"><h3>' + link[i].category + 
+        '</h3><h1>' + link[i].title +
+        '</h1><h2>' + link[i].author + '</h2>' + '</a></li></div>';}
+  document.getElementById('works').innerHTML = works;
+  
+</script>

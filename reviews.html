@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Product Reviews</title>
+      <link rel="stylesheet" type="text/css" href="asset/css/global.css"></link>
+      <script src="asset/data.js"></script>
+      <style>
+        a{
+          text-decoration: none;
+          color: inherit;
+        }
+        h1{
+        font-weight:bolder;
+        font-size: 30px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;
+        }
+        h2 {
+        font-weight:400;
+        font-size: 20px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;  
+        }
+        h3{
+        font-weight: 100;
+        font-size: 15px;
+        color: #142264;
+        text-align: left;
+        padding-bottom: 50pt;
+        }
+        h4 {
+        font-weight:bolder;
+        font-size: 20px;
+        color: #142264;
+        padding-top: 5px;
+        text-align: left;
+        }
+        h5 { 
+        font-weight: 100;
+        font-size: 10px;
+        color: #142264;
+        text-align: left;
+        }
+
+
+        .product{
+        width: 100%;
+        padding: 25px 50px;
+        float: left;
+        }
+        .productinfo{
+          width: 50%;
+          height: 250px;
+          float: right;
+          margin-right: 150px;
+          padding-top: 100px;
+        }
+        .productpic{
+          width: 25%;
+          float: left;
+          padding: 50px;
+        }
+        .productpic img {
+          width: 400px;
+          height: 400px;
+          object-fit: cover;
+        }
+
+
+      .commentlist {
+      float: left;
+      height: 250px;
+      width: 80vw;
+      padding: 25px;
+      }
+      .commentpic{
+      width: 25%;
+      height: 250px;
+      float: left;
+      }
+      .commentpic img{
+      width: 125px;
+      height: 125px;
+      display: block;
+      object-fit: cover;
+      float: right;
+      }
+      .commenttext{
+      width: 60%;
+      height: 250px;
+      float: right;
+      margin-right: 30px;
+      }
+
+      </style>
+    </head>
+    <body>
+      <nav> 
+        <div class="navbar">
+            <div class="logo">
+              <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+            </div>
+            <div class="kanan">
+                <div class="main_container">
+                    <div class="menu"><li><a href="categories.html?categories=Mammals"> Mammals </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Fish">Fish </li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Birds">Birds</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Reptiles">Reptiles</li></a></div>
+                    <div class="menu"><li><a href="categories.html?categories=Amphibians">Amphibians</li></a></div>
+                    <div class="menu" onclick="location.href='products.html'">Products</div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+        <div class="product">
+          <div id="pic"></div>
+          <div id="text"></div>
+        </div>
+        <div class="commentlist">
+          <h1 style="padding-left: 100px; padding-top: 80px; padding-bottom: 50px;text-align: left;">Reviews</h1>
+          <div> </div>
+          <div class="commentpic"><img src="asset/img/Empty profile pic.png"></div>
+          <div id="comments"></div>
+          <div class="commentpic"><img src="asset/img/Empty profile pic.png"></div>
+          <div id="comments2"></div>
+        </div>
+    </body>
+  <script>
+  var qs = window.location.search;
+  var ur = new URLSearchParams(qs);
+  var productreviews = ur.get('productreviews');
+
+  if (!productreviews) {
+    productreviews = 1;
+  }
+
+  var code = data.reviews.filter(function (el) {
+  return el.sku == productreviews;
+  });
+  
+document.getElementById('pic').innerHTML = '<div class="productpic"><img src="asset/img/' 
+  + code[0].product + '"/></div>';
+
+
+document.getElementById('text').innerHTML = '<div class="productinfo"><h2>' 
+        + code[0].categori + '</h2><h1>' + code[0].name +
+        '</h1><h2>' + code[0].star +
+        '</h2><h3>' + code[0].description + '</div></h3>' + '</div>';
+
+document.getElementById('comments').innerHTML = '<div class="commenttext"><h2 style="font-weight:bolder;">' 
+        + code[0].username1 + '</h2><h3>' + code[0].comment1 +
+        '</h3></div>';
+
+        document.getElementById('comments2').innerHTML = '<div class="commenttext"><h2 style="font-weight:bolder;">' 
+        + code[0].username2 + '</h2><h3>' + code[0].comment2 +
+        '</h3></div>';
+
+    </script>

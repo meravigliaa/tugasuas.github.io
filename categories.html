@@ -1,0 +1,135 @@
+<html><head>
+    <title>Categories</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/global.css">
+    <script src="asset/data.js"></script>
+  </head>
+  <style>
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.list {
+  list-style: none;
+  float: left;
+  height: 250px;
+  width: 100%;
+  padding: 25px;
+}
+.listpic{
+  width: 25%;
+  height: 250px;
+  float: left;
+}
+.listpic img{
+  width: 200px;
+  height: 200px;
+  display: block;
+  object-fit: cover;
+  float: right;
+}
+.listtext{
+  width: 60%;
+  height: 250px;
+  float: right;
+  margin-right: 30px;
+}
+
+
+
+h1{
+font-weight:bolder;
+font-size: 30px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+
+h1{
+font-weight:bolder;
+font-size: 30px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+h2 {
+font-weight:400;
+font-size: 20px;
+color: #142264;
+padding-top: 5px;
+text-align: left;  
+}
+h3{
+font-weight: 100;
+font-size: 15px;
+color: #142264;
+text-align: left;
+}
+h4 {
+font-weight:bolder;
+font-size: 20px;
+color: #142264;
+padding-top: 5px;
+text-align: left;
+}
+h5 { 
+font-weight: 100;
+font-size: 10px;
+color: #142264;
+text-align: left;
+}
+  </style>
+
+  <!-- DeCapy Categories Section Below-->
+  <body>
+    <nav> 
+      <div class="navbar">
+          <div class="logo">
+            <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+          </div>
+          <div class="kanan">
+              <div class="main_container">
+                  <div class="menu"><li><a href="categories.html?categories=Mammals"> Mammals </li></a></div>
+                  <div class="menu"><li><a href="categories.html?categories=Fish">Fish </li></a></div>
+                  <div class="menu"><li><a href="categories.html?categories=Birds">Birds</li></a></div>
+                  <div class="menu"><li><a href="categories.html?categories=Reptiles">Reptiles</li></a></div>
+                  <div class="menu"><li><a href="categories.html?categories=Amphibians">Amphibians</li></a></div>
+                  <div class="menu" onclick="location.href='products.html'">Products</div>
+                </div>
+          </div>
+      </div>
+  </nav>
+  <div id="header"></div>
+  <div class="list">
+      <div id="categorylist"></div>
+    </div>
+  </body>
+
+</html>
+
+<script>
+  var qs = window.location.search;
+  var ur = new URLSearchParams(qs);
+
+  var categories = ur.get('categories');
+  if (!categories) {
+    categories = Mammals;
+  }
+  var daftar = data.articles.filter(function (el) {
+  return el.category == categories;
+  });
+
+  document.getElementById('header').innerHTML = '<h1 style="padding-left: 100px; padding-top: 80px; padding-bottom: 50px;font-size: 50px;">' + daftar[0].category + '</h1>';
+
+  var categorylist = '';
+  for (var i = 0; daftar.length > i; i++) {
+    categorylist = categorylist + '<li><a href="article.html?articlecode=' + 
+      daftar[i].code + '"><div class="listpic">' + '<img src="asset/img/' + daftar[i].foto + '" /></div><div class="listtext"><h3>' + daftar[i].category + 
+        '</h3><h1>' + daftar[i].title +
+        '</h1><h2>' + daftar[i].author + '</h2>' + '</a></li></div>';}
+  document.getElementById('categorylist').innerHTML = categorylist;
+
+
+
+</script>
+

@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    padding-top: 50px;
+  }
+  
+  section {
+    position: relative;
+    width: 100vw;
+    height: 800px;
+  }
+
+/*color codes 
+3956f2 ->bright blue
+142264 -> dark blue
+f4b744 -> yellow
+*/
+ 
+/* NAVBAR*/
+nav {
+  background-color: #142264;
+  height: 51px;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.navbar{
+  display: flex;
+  /* This defines a flex container; 
+  inline or block depending on the given value. 
+  It enables a flex context for all its direct children.*/
+  position: fixed;
+  /* it always stays in the same place even if the page is scrolled*/
+  justify-content: space-between;
+  /* this is so that every element here will have an even distance
+  between each other, there will be space between the elements so
+  that it fills the whole width*/
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999; 
+  /*z index biar nav bar ttp di atas screen setelah scroll*/
+}
+
+.main_container {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+nav .main_container .menu {
+  list-style: none;
+  position:relative;
+  padding: 17px 40px;
+  font-size: 15px;
+  float: left;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.5s;
+  /*from color to transition, it is there to set up the hover feature,
+  so that when the menu is in hover, it will change colors*/
+}
+nav .main_container .menu:hover {
+  background-color: white;
+  color: #142264;
+}
+
+.logo{
+  justify-content: start;
+  /*this makes it so the logo sticks to the start of the navbar aka the left side*/
+}
+
+.kanan{
+  display: flex;
+  align-items: center;
+}
+
+

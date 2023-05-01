@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Products</title>
+      <link rel="stylesheet" type="text/css" href="asset/css/global.css"></link>
+      <script src="asset/data.js"></script>
+      <style>
+        a{
+          text-decoration: none;
+          color: inherit;
+        }
+
+
+
+        h1{
+        font-weight:bolder;
+        font-size: 30px;
+        color: #142264;
+        padding-top: 10px;
+        text-align: center;
+        }
+        h2 {
+        font-weight:400;
+        font-size: 20px;
+        color: #142264;
+        padding: 5px 0px;
+        text-align: center;
+        }
+        h3{
+        font-weight: 100;
+        font-size: 15px;
+        color: black;
+        text-align: center;
+        }
+
+
+        .products {
+        width: 100%;
+        float: left;
+        text-align: center;
+        }
+        .productbox{
+        width: 25%;
+        height: 500px;
+        list-style: none;
+        padding: 25pt;
+        display: inline-block;
+        overflow: hidden;
+        }
+        .productbox img{
+        width: 250px;
+        height: 250px;
+        margin: 25px 0px;
+        object-fit: cover;
+        }
+        
+      </style>
+    </head>
+    <body>
+        <nav> 
+            <div class="navbar">
+                <div class="logo">
+                  <img src="asset/img/Logo.png" style="padding-left: 50px; width: 50px;" onclick="location.href='home.html'"> 
+                </div>
+                <div class="kanan">
+                    <div class="main_container">
+                        <div class="menu"><li><a href="categories.html?categories=Mammals"> Mammals </li></a></div>
+                        <div class="menu"><li><a href="categories.html?categories=Fish">Fish </li></a></div>
+                        <div class="menu"><li><a href="categories.html?categories=Birds">Birds</li></a></div>
+                        <div class="menu"><li><a href="categories.html?categories=Reptiles">Reptiles</li></a></div>
+                        <div class="menu"><li><a href="categories.html?categories=Amphibians">Amphibians</li></a></div>
+                        <div class="menu" onclick="location.href='products.html'">Products</div>
+                      </div>
+                </div>
+            </div>
+        </nav>
+        <h1 style="padding-left: 100px; padding-top: 80px; padding-bottom: 50px;font-size: 50px; text-align: left;">Recommended Products</h1>
+        <div class="products">
+            <div id="productlist"></div>
+        </div>
+    </body>
+</html>
+<script>
+
+
+var productlist = '';
+for (var i = 0; data.reviews.length > i; i++) {
+    productlist = productlist + '<div class="productbox"><li><a href="reviews.html?productreviews=' + 
+        data.reviews[i].sku + '"><img src="asset/img/' + data.reviews[i].product + '" /><h3>' + data.reviews[i].categori +
+        '</h3><h1>' + data.reviews[i].name +
+        '</h1><h2>' + data.reviews[i].star + '</h2>' + '</a></li></div>';
+  document.getElementById('productlist').innerHTML = productlist;
+}
+
+
+
+</script>
